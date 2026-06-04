@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+
+app:
+  jwt:
+    secret: bXktdmVyeS1zZWNyZXQta2V5LWZvci1qd3QtdGhhdC1pcy0yNTYtYml0cy1sb25nLWVub3VnaA==
+    expiration-ms: 3600000
+
+order:
+  scheduler:
+    # Far-future cron so the scheduler never fires during tests; we invoke it directly.
+    pending-to-processing-cron: "0 0 0 1 1 ?"

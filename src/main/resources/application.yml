@@ -1,0 +1,41 @@
+spring:
+  application:
+    name: order-processing-system
+  datasource:
+    url: jdbc:h2:mem:orderdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    # Base64-encoded 256-bit secret. Override via APP_JWT_SECRET env var in real deployments.
+    secret: ${APP_JWT_SECRET:bXktdmVyeS1zZWNyZXQta2V5LWZvci1qd3QtdGhhdC1pcy0yNTYtYml0cy1sb25nLWVub3VnaA==}
+    expiration-ms: 3600000
+
+# Scheduler: PENDING -> PROCESSING every 5 minutes
+order:
+  scheduler:
+    pending-to-processing-cron: "0 */5 * * * *"
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.assignment.orderprocessing: INFO
